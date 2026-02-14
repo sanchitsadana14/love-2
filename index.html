@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>For Anushka ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{
+  margin:0;
+  padding:0;
+  text-align:center;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #ffdde1, #ee9ca7);
+  background-size: 400% 400%;
+  animation: gradientBG 10s ease infinite;
+  overflow:hidden;
+}
+
+@keyframes gradientBG {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+
+h1{
+  margin-top:80px;
+  font-size:30px;
+  color:white;
+  text-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+button{
+  padding:15px 25px;
+  font-size:16px;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+  position:absolute;
+  transition: 0.3s ease;
+}
+
+#yes{
+  background:#ff4b5c;
+  color:white;
+  left:30%;
+  top:65%;
+  box-shadow:0 0 15px #ff4b5c;
+}
+
+#no{
+  background:#333;
+  color:white;
+  left:55%;
+  top:65%;
+}
+
+#photo{
+  width:280px;
+  max-width:90%;
+  border-radius:20px;
+  box-shadow:0 0 40px red;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from {box-shadow:0 0 20px red;}
+  to {box-shadow:0 0 50px pink;}
+}
+
+.heart{
+  position:absolute;
+  color:red;
+  animation: float 5s linear infinite;
+}
+
+@keyframes float{
+  0%{transform: translateY(100vh) scale(1);}
+  100%{transform: translateY(-10vh) scale(1.5);}
+}
+</style>
+</head>
+
+<body>
+
+<h1 id="question">Anushka 🥺<br>Will you be my Valentine?</h1>
+
+<button id="yes">Yes ❤️</button>
+<button id="no">No 😒</button>
+
+<audio id="music" src="song.mp3"></audio>
+
+<script>
+let no = document.getElementById("no");
+let yes = document.getElementById("yes");
+let music = document.getElementById("music");
+let count = 0;
+
+let yesTexts = [
+"Please say Yes 🥺",
+"Think again 😭",
+"Are you sure? 💔",
+"Don’t break my heart 😭",
+"You can't escape 😏"
+];
+
+function moveNo(){
+  count++;
+  no.style.left = Math.random()*80 + "%";
+  no.style.top = Math.random()*80 + "%";
+
+  if(count < yesTexts.length){
+    yes.innerHTML = yesTexts[count];
+  }
+
+  if(count >= 5){
+    yes.style.transform = "scale(2)";
+  }
+}
+
+no.addEventListener("mouseover", moveNo);
+no.addEventListener("touchstart", function(e){
+  e.preventDefault();
+  moveNo();
+});
+no.addEventListener("click", moveNo);
+
+yes.addEventListener("click", function(){
+
+  document.body.innerHTML = `
+  <h1 style="margin-top:40px;">
+  I knew you would say YES Anushka ❤️<br><br>
+  Tum par marta hu, sach kehta hu 💖<br><br>
+  Forever yours,<br>
+  Sanchit
+  </h1>
+  <img src="love.jpg" id="photo">
+  <audio autoplay loop>
+    <source src="song.mp3" type="audio/mp3">
+  </audio>
+  `;
+
+  // Create floating hearts
+  for(let i=0;i<25;i++){
+    let heart = document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="❤️";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(20+Math.random()*30)+"px";
+    heart.style.animationDuration=(3+Math.random()*5)+"s";
+    document.body.appendChild(heart);
+  }
+});
+</script>
+
+</body>
+</html>
