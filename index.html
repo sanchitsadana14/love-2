@@ -5,6 +5,7 @@
 <title>For Anushka ❤️</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
+
 body{
   margin:0;
   padding:0;
@@ -23,20 +24,20 @@ body{
 }
 
 h1{
-  margin-top:80px;
-  font-size:30px;
+  margin-top:70px;
+  font-size:28px;
   color:white;
-  text-shadow: 0 0 10px rgba(0,0,0,0.3);
+  text-shadow:0 0 10px rgba(0,0,0,0.4);
 }
 
 button{
-  padding:15px 25px;
+  padding:14px 25px;
   font-size:16px;
   border:none;
   border-radius:30px;
   cursor:pointer;
   position:absolute;
-  transition: 0.3s ease;
+  transition:0.3s ease;
 }
 
 #yes{
@@ -44,7 +45,7 @@ button{
   color:white;
   left:30%;
   top:65%;
-  box-shadow:0 0 15px #ff4b5c;
+  box-shadow:0 0 20px #ff4b5c;
 }
 
 #no{
@@ -54,22 +55,21 @@ button{
   top:65%;
 }
 
-#photo{
-  width:280px;
-  max-width:90%;
-  border-radius:20px;
-  box-shadow:0 0 40px red;
-  animation: glow 2s infinite alternate;
+.photo{
+  position:absolute;
+  width:120px;
+  border-radius:15px;
+  box-shadow:0 0 20px rgba(0,0,0,0.4);
+  animation: pop 0.5s ease;
 }
 
-@keyframes glow {
-  from {box-shadow:0 0 20px red;}
-  to {box-shadow:0 0 50px pink;}
+@keyframes pop{
+  from{transform:scale(0.5);opacity:0;}
+  to{transform:scale(1);opacity:1;}
 }
 
 .heart{
   position:absolute;
-  color:red;
   animation: float 5s linear infinite;
 }
 
@@ -77,43 +77,58 @@ button{
   0%{transform: translateY(100vh) scale(1);}
   100%{transform: translateY(-10vh) scale(1.5);}
 }
+
 </style>
 </head>
 
 <body>
 
-<h1 id="question">Anushka 🥺<br>Will you be my Valentine?</h1>
+<h1>Anushka 🥺<br>Will you be my Valentine?</h1>
 
 <button id="yes">Yes ❤️</button>
 <button id="no">No 😒</button>
 
-<audio id="music" src="song.mp3"></audio>
-
 <script>
+
 let no = document.getElementById("no");
 let yes = document.getElementById("yes");
-let music = document.getElementById("music");
 let count = 0;
 
+let pics = ["pic1.jpg","pic2.jpg","pic3.jpg","pic4.jpg"];
+
 let yesTexts = [
-"Please say Yes 🥺",
-"Think again 😭",
-"Are you sure? 💔",
-"Don’t break my heart 😭",
-"You can't escape 😏"
+"Please naaa 🥺",
+"Mat bolo no 😭",
+"Last chance baby 😢",
+"Okay I’ll cry now 🥹"
 ];
 
 function moveNo(){
+
+  if(count < pics.length){
+
+    let img = document.createElement("img");
+    img.src = pics[count];
+    img.className = "photo";
+
+    img.style.left = (20 + Math.random()*60) + "%";
+    img.style.top = (20 + Math.random()*40) + "%";
+    img.style.transform = "rotate(" + (Math.random()*20 - 10) + "deg)";
+
+    document.body.appendChild(img);
+  }
+
+  if(count < yesTexts.length){
+    yes.innerText = yesTexts[count];
+  }
+
   count++;
+
   no.style.left = Math.random()*80 + "%";
   no.style.top = Math.random()*80 + "%";
 
-  if(count < yesTexts.length){
-    yes.innerHTML = yesTexts[count];
-  }
-
   if(count >= 5){
-    yes.style.transform = "scale(2)";
+    yes.style.transform = "scale(1.8)";
   }
 }
 
@@ -133,13 +148,12 @@ yes.addEventListener("click", function(){
   Forever yours,<br>
   Sanchit
   </h1>
-  <img src="love.jpg" id="photo">
+  <img src="love.jpg" style="width:280px;max-width:90%;border-radius:20px;box-shadow:0 0 40px red;">
   <audio autoplay loop>
     <source src="song.mp3" type="audio/mp3">
   </audio>
   `;
 
-  // Create floating hearts
   for(let i=0;i<25;i++){
     let heart = document.createElement("div");
     heart.className="heart";
@@ -150,6 +164,7 @@ yes.addEventListener("click", function(){
     document.body.appendChild(heart);
   }
 });
+
 </script>
 
 </body>
